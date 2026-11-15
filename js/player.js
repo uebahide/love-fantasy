@@ -53,7 +53,7 @@ const Player = {
   // 目（向いている方向に少しずれる）
   const ox = this.dir.x * 3;
   const oy = this.dir.y * 3;
-  ctx.fillStyle = '#ffffff';
+  ctx.fillStyle = this.dashing ? '#e63946' : this.color;
   ctx.beginPath();
   ctx.arc(this.x + r - 5 + ox, this.y + r - 3 + oy, 3, 0, Math.PI * 2);
   ctx.arc(this.x + r + 5 + ox, this.y + r - 3 + oy, 3, 0, Math.PI * 2);
