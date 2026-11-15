@@ -4,6 +4,9 @@ const Player = {
   x: 0,
   y: 0,
   size: 24,
+  color: '#4a6fa5',
+  
+
 
   init() {
     this.x = CONFIG.TILE * 2;
@@ -31,7 +34,10 @@ const Player = {
   },
 
   draw(ctx) {
-    ctx.fillStyle = '#f4d35e';
-    ctx.fillRect(this.x, this.y, this.size, this.size);
+    const r = this.size / 2;
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x + r, this.y + r, r, 0, Math.PI * 2);   // 丸を描く
+    ctx.fill();
   },
 };
