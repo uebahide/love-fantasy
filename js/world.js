@@ -51,6 +51,7 @@ const World = {
       for (let x = 0; x < CONFIG.COLS; x++) {
         const t = this.map[y][x];
         ctx.fillStyle = t === 1 ? this.colors.wall : t === 2 ? this.colors.hazard : this.colors.floor;
+        ctx.fillRect(x * CONFIG.TILE, y * CONFIG.TILE, CONFIG.TILE, CONFIG.TILE);
       }
     }
   },
