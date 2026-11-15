@@ -5,6 +5,8 @@ const Player = {
   y: 0,
   size: 24,
   color: '#4a6fa5',
+  dashSpeed: 6,        // ダッシュ中の速さ（普通は 3）
+  dashing: false,      // 今ダッシュ中かどうか
   dir: { x: 0, y: 1 },   // 最初は下向き
   
 
