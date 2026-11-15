@@ -39,5 +39,10 @@ const Player = {
     ctx.beginPath();
     ctx.arc(this.x + r, this.y + r, r, 0, Math.PI * 2);   // 丸を描く
     ctx.fill();
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(this.x + r - 5, this.y + r - 3, 3, 0, Math.PI * 2);   // 左目
+    ctx.arc(this.x + r + 5, this.y + r - 3, 3, 0, Math.PI * 2);   // 右目
+    ctx.fill();
   },
 };
