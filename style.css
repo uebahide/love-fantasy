@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  background: #1b1b2f;
+  color: #eee;
+  font-family: sans-serif;
+  text-align: center;
+}
+canvas {
+  background: #000;
+  border: 2px solid #555;
+  image-rendering: pixelated;
+}
+.help { color: #aaa; }
