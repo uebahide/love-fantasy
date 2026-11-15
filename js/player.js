@@ -5,6 +5,7 @@ const Player = {
   y: 0,
   size: 24,
   color: '#4a6fa5',
+  dir: { x: 0, y: 1 },   // 最初は下向き
   
 
 
@@ -24,6 +25,9 @@ const Player = {
     // 横と縦を別々に動かす（壁にぶつかったら止まる）
     if (this.canMoveTo(this.x + dx, this.y)) this.x += dx;
     if (this.canMoveTo(this.x, this.y + dy)) this.y += dy;
+    if (dx !== 0 || dy !== 0) {
+  this.dir = { x: Math.sign(dx), y: Math.sign(dy) };
+}
   },
 
   // 四隅のどこかが壁なら動けない
@@ -34,10 +38,21 @@ const Player = {
   },
 
   draw(ctx) {
-    const r = this.size / 2;
-    ctx.fillStyle = this.color;
-    ctx.beginPath();
-    ctx.arc(this.x + r, this.y + r, r, 0, Math.PI * 2);   // 丸を描く
-    ctx.fill();
+  const r = this.size / 2;
+
+  // 体（丸）
+  ctx.fillStyle = this.color;
+  ctx.beginPath();
+  ctx.arc(this.x + r, this.y + r, r, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 目（向いている方向に少しずれる）
+  const ox = this.dir.x * 3;
+  const oy = this.dir.y * 3;
+  ctx.fillStyle = '#ffffff';
+  ctx.beginPath();
+  ctx.arc(this.x + r - 5 + ox, this.y + r - 3 + oy, 3, 0, Math.PI * 2);
+  ctx.arc(this.x + r + 5 + ox, this.y + r - 3 + oy, 3, 0, Math.PI * 2);
+  ctx.fill();
   },
 };
