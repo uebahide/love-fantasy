@@ -19,10 +19,12 @@ const Player = {
   update() {
     let dx = 0;
     let dy = 0;
-    if (Input.isDown('ArrowLeft', 'a'))  dx -= CONFIG.PLAYER_SPEED;
-    if (Input.isDown('ArrowRight', 'd')) dx += CONFIG.PLAYER_SPEED;
-    if (Input.isDown('ArrowUp', 'w'))    dy -= CONFIG.PLAYER_SPEED;
-    if (Input.isDown('ArrowDown', 's'))  dy += CONFIG.PLAYER_SPEED;
+    this.dashing = Input.isDown('Shift');
+    const speed = this.dashing ? this.dashSpeed : CONFIG.PLAYER_SPEED;
+    if (Input.isDown('ArrowLeft', 'a'))  dx -= speed;
+    if (Input.isDown('ArrowRight', 'd')) dx += speed;
+    if (Input.isDown('ArrowUp', 'w'))    dy -= speed;
+    if (Input.isDown('ArrowDown', 's'))  dy += speed;
 
     // 横と縦を別々に動かす（壁にぶつかったら止まる）
     if (this.canMoveTo(this.x + dx, this.y)) this.x += dx;
