@@ -3,36 +3,47 @@
 // 0 = 床, 1 = 壁
 const World = {
   map: [],
+  layout: [
+    '####################',
+    '#..................#',
+    '#..####......####..#',
+    '#..#............#..#',
+    '#..#............#..#',
+    '#.......####.......#',
+    '#..................#',
+    '#....#........#....#',
+    '#....#........#....#',
+    '#..................#',
+    '#.......####.......#',
+    '#..#............#..#',
+    '#..####......####..#',
+    '#..................#',
+    '####################',
+  ],
   colors: {
       floor: '#f7d6e0',
       wall: '#b23a48',
+      hazard: '#ff8c42',
   },
 
   init() {
-    this.map = [];
-    for (let y = 0; y < CONFIG.ROWS; y++) {
-      const row = [];
-      for (let x = 0; x < CONFIG.COLS; x++) {
-        const edge = x === 0 || y === 0 || x === CONFIG.COLS - 1 || y === CONFIG.ROWS - 1;
-        row.push(edge ? 1 : 0);   // 外周だけ壁
-      }
-      this.map.push(row);
-    }
+    this.map = this.layout.map((row) =>
+      row.split('').map((ch) => (ch === '#' ? 1 : ch === '~' ? 2 : 0))
+    );
   },
 
   // そのピクセル位置が壁かどうか（player.js から使う）
-  isWall(px, py) {
+  isHazard(px, py) {
     const x = Math.floor(px / CONFIG.TILE);
     const y = Math.floor(py / CONFIG.TILE);
-    if (y < 0 || y >= CONFIG.ROWS || x < 0 || x >= CONFIG.COLS) return true;
-    return this.map[y][x] === 1;
+    return this.map[y] !== undefined && this.map[y][x] === 2;
   },
 
   draw(ctx) {
     for (let y = 0; y < CONFIG.ROWS; y++) {
       for (let x = 0; x < CONFIG.COLS; x++) {
-        ctx.fillstyle = this.map[y][x] === 1 ? this.colors.wall : this.colors.floor;
-        ctx.fillRect(x * CONFIG.TILE, y * CONFIG.TILE, CONFIG.TILE, CONFIG.TILE);
+        const t = this.map[y][x];
+        ctx.fillStyle = t === 1 ? this.colors.wall : t === 2 ? this.colors.hazard : this.colors.floor;
       }
     }
   },
