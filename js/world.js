@@ -32,6 +32,13 @@ const World = {
     );
   },
 
+  isWall(px, py) {
+  const x = Math.floor(px / CONFIG.TILE);
+  const y = Math.floor(py / CONFIG.TILE);
+  if (y < 0 || y >= CONFIG.ROWS || x < 0 || x >= CONFIG.COLS) return true;
+  return this.map[y][x] === 1;
+},
+
   // そのピクセル位置が壁かどうか（player.js から使う）
   isHazard(px, py) {
     const x = Math.floor(px / CONFIG.TILE);
@@ -44,6 +51,7 @@ const World = {
       for (let x = 0; x < CONFIG.COLS; x++) {
         const t = this.map[y][x];
         ctx.fillStyle = t === 1 ? this.colors.wall : t === 2 ? this.colors.hazard : this.colors.floor;
+        ctx.fillRect(x * CONFIG.TILE, y * CONFIG.TILE, CONFIG.TILE, CONFIG.TILE);
       }
     }
   },
