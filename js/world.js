@@ -3,6 +3,10 @@
 // 0 = 床, 1 = 壁
 const World = {
   map: [],
+  colors: {
+      floor: '#f7d6e0',
+      wall: '#b23a48',
+  },
 
   init() {
     this.map = [];
@@ -27,7 +31,7 @@ const World = {
   draw(ctx) {
     for (let y = 0; y < CONFIG.ROWS; y++) {
       for (let x = 0; x < CONFIG.COLS; x++) {
-        ctx.fillStyle = this.map[y][x] === 1 ? '#555577' : '#2e4a2e';
+        ctx.fillstyle = this.map[y][x] === 1 ? this.colors.wall : this.colors.floor;
         ctx.fillRect(x * CONFIG.TILE, y * CONFIG.TILE, CONFIG.TILE, CONFIG.TILE);
       }
     }
