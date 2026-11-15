@@ -38,15 +38,21 @@ const Player = {
   },
 
   draw(ctx) {
-    const r = this.size / 2;
-    ctx.fillStyle = this.color;
-    ctx.beginPath();
-    ctx.arc(this.x + r, this.y + r, r, 0, Math.PI * 2);   // 丸を描く
-    ctx.fill();
-    ctx.fillStyle = '#ffffff';
-    ctx.beginPath();
-    ctx.arc(this.x + r - 5, this.y + r - 3, 3, 0, Math.PI * 2);   // 左目
-    ctx.arc(this.x + r + 5, this.y + r - 3, 3, 0, Math.PI * 2);   // 右目
-    ctx.fill();
+  const r = this.size / 2;
+
+  // 体（丸）
+  ctx.fillStyle = this.color;
+  ctx.beginPath();
+  ctx.arc(this.x + r, this.y + r, r, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 目（向いている方向に少しずれる）
+  const ox = this.dir.x * 3;
+  const oy = this.dir.y * 3;
+  ctx.fillStyle = '#ffffff';
+  ctx.beginPath();
+  ctx.arc(this.x + r - 5 + ox, this.y + r - 3 + oy, 3, 0, Math.PI * 2);
+  ctx.arc(this.x + r + 5 + ox, this.y + r - 3 + oy, 3, 0, Math.PI * 2);
+  ctx.fill();
   },
 };
